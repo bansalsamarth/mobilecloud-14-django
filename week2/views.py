@@ -18,7 +18,7 @@ video = []
 
 @method_decorator(csrf_exempt)
 def video_handler(request):
-    response = HttpResponse(status = 400)
+    response = HttpResponse()
 
     if request.method == "GET":
         """Display list of videos if GET request"""
@@ -36,7 +36,7 @@ def video_handler(request):
         url = request.POST.get('url', 'null')
         duration = request.POST.get('duration','null')
         if (name=="null" or url=="null" or duration=="null" or name.replace(" ", "") <1 or url.replace(" ", "")<10 or duration<=0):
-            response['status_code'] = 400
+            response.status_code = 400
             response.write("Missing ['name','duration','url'].")
             return response
         else:
